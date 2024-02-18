@@ -1,0 +1,6 @@
+selenium
+bs4
+tqdm
+sqlalchemy
+psycopg2-binary
+polars-lts-cpu[connectorx,pyarrow]
