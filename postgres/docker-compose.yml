@@ -1,0 +1,42 @@
+version: '2'
+services:
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:15
+    hostname: postgres
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=dwh
+      - POSTGRES_PORT=5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      -   5435:5432/tcp
+    networks:
+      - db
+  
+  pgadmin4:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.com 
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret 
+      - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True 
+      - PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!" 
+      - PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10 
+    ports:
+      - 80:80
+    networks:
+      - db
+
+volumes:
+  postgres_data:
+    name: postgres_data
+    external: true
+    
+networks:
+  db:
+    name : rdbms
+    external: true

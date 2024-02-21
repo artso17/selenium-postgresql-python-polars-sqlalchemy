@@ -217,7 +217,7 @@ if __name__ == '__main__':
     
     try:
         # Execute function pages to start Web Scraping
-        # pages(5)
+        pages(1)
         print('The data is successfully extracted and loaded to DL')
     except Exception as e:
         print(e)
